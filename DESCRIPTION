@@ -1,0 +1,20 @@
+Package: icubedsim
+Type: Package
+Title: Simulate ICU Occupancy
+Version: 0.1.0
+Authors@R: as.person(c(
+  "Querci Lorenzo <querci.lorenzo@gmail.com> [aut, cre]"
+  ))
+Maintainer: Querci Lorenzo <querci.lorenzo@gmail.com>
+Description: ICU bed simulation permit to simulat bed occupancy and number of rejected patients under different condition.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
+Imports:
+  data.table,
+  imputeTS,
+  MASS,
+  ggplot2,
+  ggpubr,
+  dplyr
