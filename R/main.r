@@ -41,8 +41,18 @@
 #'
 #' @export
 #'
+#' @import data.table
+#' @import imputeTS
+#' @import ggplot2
+#' @import MASS
+#' @import ggpubr
+#' @import stats
+#' @import utils
+
+#'
 #' @examples
-#' icubedsim.simulation(seed = 12345, month = 8, nBedsStart = 20, icutype = "fix", coefHE = c(1, 1.5, 1, 0.5), type = "analysis")
+#' icubedsim.simulation(seed = 12345, month = 2, nBedsStart = 10, icutype = "fix",
+#' coefHE = c(1, 1.5, 1, 0.5), type = "analysis")
 #'
 
 icubedsim.simulation<-function(
@@ -69,6 +79,8 @@ icubedsim.simulation<-function(
                       type = "analysis" #or "result"
                       )
 {
+
+  Hours = NULL
 
   ###admission rate function###
   admssionRateFunction<-function(month = month, election = election, cAR = cAR, coefHE = coefHE, coefHU = coefHU, coefDE = coefDE, coefDU = coefDU, coefME = coefME, coefMU = coefMU, coef = 1, error = FALSE, error.perc = NA){
@@ -225,7 +237,7 @@ icubedsim.simulation<-function(
   bedMatrixList<-list()
   prob<-list()
   for (s in 1:1){
-    #print(paste("Simulation n°:", s))
+    #print(paste("Simulation n:", s))
     admissionRate<-admssionRateFunction(month = monthS, election = election, cAR = cAR, coefHE = coefHE, coefHU = coefHU, coefDE = coefDE, coefDU = coefDU, coefME = coefME, coefMU = coefMU, coef = coef, error = error, error.perc = error.perc)
     a = 1 #contatore pazienti che richiedono il posto in ICU rispetto alla matrice admissionRate
     j = c() #admissionid dei pazienti che vengono rigettati dalla ICU
@@ -242,7 +254,7 @@ icubedsim.simulation<-function(
     idBeds<-rep(NA, nBedsMax) #raccoglie l'admission key dei pazienti ricoverati in quel momento (per il modello di predizione)
     hourClockBeds<-rep(NA, nBedsMax) #Conteggia i giorni di degenza attuali dei pazienti ricoverati
     bedMatrix<-matrix(ncol=nBedsMax, nrow = hoursSim) # Risultati
-    PP = c() # Vettore che contiene le probabilitá di apertura
+    PP = c() # Vettore che contiene le probabilita di apertura
     for (i in 1:hoursSim){ # ore
       KC = 0
       hourBeds<-hourBeds-1
@@ -365,7 +377,7 @@ icubedsim.simulation<-function(
   bedMatrixList<-list()
   prob<-list()
   for (s in 1:nsimulation){
-    cat("Simulation n°:", s, " of ", nsimulation, "\n")
+    cat("Simulation n:", s, " of ", nsimulation, "\n")
     admissionRate<-admssionRateFunction(month = month, election = election, cAR = cAR, coefHE = coefHE, coefHU = coefHU, coefDE = coefDE, coefDU = coefDU, coefME = coefME, coefMU = coefMU, coef = coef, error = error, error.perc = error.perc)
     a = 1 #contatore pazienti che richiedono il posto in ICU rispetto alla matrice admissionRate
     j = c() #admissionid dei pazienti che vengono rigettati dalla ICU
@@ -382,7 +394,7 @@ icubedsim.simulation<-function(
     idBeds<-rep(NA, nBedsMax) #raccoglie l'admission key dei pazienti ricoverati in quel momento (per il modello di predizione)
     hourClockBeds<-rep(NA, nBedsMax) #Conteggia i giorni di degenza attuali dei pazienti ricoverati
     bedMatrix<-matrix(ncol=nBedsMax, nrow = hoursSim) # Risultati
-    PP = c() # Vettore che contiene le probabilitá di apertura
+    PP = c() # Vettore che contiene le probabilita di apertura
     for (i in 1:hoursSim){ # ore
       KC = 0
       hourBeds<-hourBeds-1

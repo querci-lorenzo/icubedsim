@@ -102,6 +102,7 @@ sdHourRejected
 This function simulate ICU occupancy based on admission rate coefficients, number of beds ant fix or variable ICU bed approach.
 }
 \examples{
-icubedsim.simulation(seed = 12345, month = 8, nBedsStart = 20, icutype = "fix", coefHE = c(1, 1.5, 1, 0.5), type = "analysis")
+icubedsim.simulation(seed = 12345, month = 2, nBedsStart = 10, icutype = "fix",
+coefHE = c(1, 1.5, 1, 0.5), type = "analysis")
 
 }

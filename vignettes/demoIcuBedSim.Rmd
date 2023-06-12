@@ -1,0 +1,34 @@
+---
+title: "Demo icubedsim"
+author: "Lorenzo Querci"
+date: "2023-06-12"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: true
+    toc_depth: 3
+---
+
+```{r setup1, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+library(ggplot2)
+library(ggpubr)
+```
+
+```{r setup2, include=TRUE}
+library(icubedsim)
+```
+
+## IcuBedSim
+
+ICU-Bed-SIM a library which permit simulate ICU occupancy based on user rules for admission rate. There are two alghoritm: one for fix bed ICU and other for variable bed ICU.
+
+Project come from an idea of ESICM Datathon 2023 - Team 3
+
+If you have not your data you can use typedata = "synthetic"
+
+```{r example1}
+icubedsim::icubedsim.simulation(seed = 12345, typedata = "synthetic", nBedsStart = 20, month = 2, nsimulation = 2, type = "fix")
+analysis = icubedsim::icubedsim.simulation(seed = 12345, typedata = "synthetic", nBedsStart = 20, month = 2, nsimulation = 2, icutype = "fix", type = "analysis")
+analysis$plot1
+```
